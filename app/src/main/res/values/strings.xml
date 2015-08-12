@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">myNotes</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_edit_note">EditNoteActivity</string>
+    <string name="setting_color_title">Note Color Setting</string>
+    <string name="setting_color_message">R - Red; G - Green; W - White</string>
+    <string name="positive_button_label">OK</string>
+    <string name="negative_button_label">CANCEL</string>
+    <string name="title_activity_setting">setting</string>
+
+</resources>
