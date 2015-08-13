@@ -58,12 +58,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String s = mEditText.getText().toString();
                 NoteListItem noteListItem = new NoteListItem(s);
-                mAdapter.addItem(noteListItem);
-                mEditText.setText("");
                 NoteDAO noteDAO = new NoteDAO(MainActivity.this);
-                noteDAO.save(noteListItem);
-                /*mAdapter = new NoteListItemAdapter(MainActivity.this, mRecyclerView);
-                mRecyclerView.setAdapter(mAdapter);*/
+                NoteListItem noteInserted = noteDAO.insertAndReturn(noteListItem);
+                mAdapter.addItem(noteInserted);
+                mEditText.setText("");
             }
         });
 
