@@ -22,10 +22,12 @@ public class NoteListItemAdapter extends RecyclerView.Adapter<NoteListItemAdapte
     private Context mContext;
     private RecyclerView mRecyclerView;
     private List<NoteListItem> mNoteListItems = new ArrayList<NoteListItem>();
+    private int color;
 
-    public NoteListItemAdapter(Context context, RecyclerView recyclerView) {
+    public NoteListItemAdapter(Context context, RecyclerView recyclerView, int color) {
         this.mContext = context;
         this.mRecyclerView = recyclerView;
+        this.color = color;
         NoteDAO noteDAO = new NoteDAO(context);
         mNoteListItems = noteDAO.list();
     }
@@ -45,6 +47,7 @@ public class NoteListItemAdapter extends RecyclerView.Adapter<NoteListItemAdapte
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(mContext).inflate(R.layout.note_list_item, viewGroup, false);
+        v.setBackgroundColor(this.color);
 
         v.setOnClickListener(new View.OnClickListener() {
             @Override

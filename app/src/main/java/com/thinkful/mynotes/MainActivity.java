@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private NoteListItemAdapter mAdapter;
     private Button mButton;
     private EditText mEditText;
+    private int foregroundColor = Color.WHITE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +42,13 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+
+        setColor();
+
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mAdapter = new NoteListItemAdapter(this, mRecyclerView);
+        mAdapter = new NoteListItemAdapter(this, mRecyclerView, foregroundColor);
         mRecyclerView.setAdapter(mAdapter);
 
         mEditText = (EditText) findViewById(R.id.edit_text);
@@ -63,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        setColor();
     }
 
     @Override
@@ -77,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
             }
         } else if (resultCode == RESULT_OK && requestCode == 2) {
             setColor();
+            mAdapter = new NoteListItemAdapter(MainActivity.this, mRecyclerView, foregroundColor);
+            mRecyclerView.setAdapter(mAdapter);
         }
     }
 
@@ -126,16 +131,16 @@ public class MainActivity extends AppCompatActivity {
             mRecyclerView.setBackgroundColor(Color.WHITE);
         }
 
-//
-
-        /*color = prefs.getString("NOTE_FORE_COLOR", "G");
-        if(color.toUpperCase().contains("G")){
-            mRecyclerView.setBackgroundColor(Color.GREEN);
-        }else if(color.toUpperCase().contains("R")){
-            mRecyclerView.setBackgroundColor(Color.RED);
-        }else{
-            mRecyclerView.setBackgroundColor(Color.WHITE);
-        }*/
+        color = prefs.getString("NOTE_FORE_COLOR", "Y");
+        if (color.toUpperCase().contains("P")){
+            foregroundColor = Color.MAGENTA;
+        } else if (color.toUpperCase().contains("G")){
+            foregroundColor = Color.GRAY;
+        } else if (color.toUpperCase().contains("B")){
+            foregroundColor = Color.BLACK;
+        } else {
+            foregroundColor = Color.YELLOW;
+        }
     }
 
     @Override
